@@ -1,0 +1,18 @@
+public class editprofile_controller
+	{
+        public User u {get;set;}
+        public editprofile_controller()
+        	{
+                list<user> uu = new list<user>();
+                uu = [select id,Username,TimeZoneSidKey, street, city, state, postalcode, country, Phone,Name,firstname, lastname, email, title from user where id = :UserInfo.getUserId()];
+                u = new User(); u = uu[0];
+            }
+        public void save() 
+        	{
+                try
+                	{
+                        update u;
+                    }
+                catch(exception e){system.debug(e.getMessage());}
+            }
+    }

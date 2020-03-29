@@ -1,0 +1,32 @@
+<apex:page controller="viewpackages_controller">
+    <apex:slds />
+    <apex:pageBlock >
+        <apex:pageBlockSection title="View Past and Future Deliveries">
+            <apex:form >
+                    <apex:pageBlock >
+                        <apex:pageBlockButtons location="bottom">
+                            <apex:commandButton action="{!view1}" value="See Not Yet Delivered" reRender="Undelivered" />
+                            <apex:commandButton action="{!view2}" value="See Delivered" reRender="Delivered"/>
+                        </apex:pageBlockButtons>
+                    </apex:pageBlock>
+            </apex:form>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Undelivered" id="Undelivered">
+            <apex:pageBlockTable value="{!newmaillist}" var="ca">
+                <apex:column headerValue="Mail ID" ><apex:outputField value="{!ca.name}"/></apex:column>
+                <apex:column headerValue="Delivery Status" ><apex:outputField value="{!ca.Delivery_Status__c}"/></apex:column>
+                <apex:column headerValue="Item" ><apex:outputField value="{!ca.Description__c}"/></apex:column>
+                <apex:column headerValue="Weight" ><apex:outputField value="{!ca.Weight_kg__c}"/></apex:column>
+                <apex:column headerValue="Comments"><apex:outputField value="{!ca.Comments__c}"/></apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Delivered" id="Delivered">
+            <apex:pageBlockTable value="{!oldmaillist}" var="ca2">
+                <apex:column headerValue="Mail ID" ><apex:outputField value="{!ca2.name}"/></apex:column>
+                <apex:column headerValue="Item" ><apex:outputField value="{!ca2.Description__c}"/></apex:column>
+                <apex:column headerValue="Weight"><apex:outputField value="{!ca2.Weight_kg__c}" /></apex:column>
+                <apex:column headerValue="Comments"><apex:outputField value="{!ca2.Comments__c}"/></apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>

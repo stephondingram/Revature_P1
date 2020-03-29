@@ -1,0 +1,22 @@
+<apex:page controller="TrackPackage_controller">
+    <apex:slds />
+    <apex:form >
+        <apex:actionRegion >
+            <apex:pageBlock >
+                <apex:pageBlockSection >
+                    <h1 style="display: inline">Enter your Tracking Number:</h1>
+                </apex:pageBlockSection>
+                <apex:pageBlockSection >
+                    <apex:inputText maxlength="20" value="{!trackingCode}" /><br/>
+                    <apex:commandButton value="Search" action="{!search}"/>
+                </apex:pageBlockSection>    
+                <apex:pageBlockSection >
+                    <apex:pageBlockTable value="{!trackinglist}" var="mt">
+                        <apex:column value="{!mt.Arrival_Location__c}" />
+                        <apex:column value="{!mt.Arrival_Time__c}" />
+                    </apex:pageBlockTable>
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+        </apex:actionRegion>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,49 @@
+public with sharing class createcase_controller
+	{
+        public Case case1 {get; set;}
+        public pagereference pg {get; set;}
+        public list<case> oldcaselist{get;set;}
+        public list<case> newcaselist{get;set;}
+        public createcase_controller()
+        	{
+                case1 = new Case();
+                oldcaselist = new list<Case>();
+                newcaselist = new list<Case>();
+            }
+        public void renderOpenCases()
+        	{
+                try{newcaselist = [select casenumber,subject,description, status from case where status != 'Closed'];}
+                catch(exception e)
+                	{
+                        system.debug(e.getMessage());
+                    }
+            }
+        public void renderClosedCases()
+        	{
+                try{oldcaselist = [select casenumber,subject,description, status from case where status = 'Closed'];}
+                catch(exception e)
+                	{
+                        system.debug(e.getMessage());
+                    }
+            }
+        
+        public PageReference save()
+        	{
+                try
+                	{
+                        insert case1;
+                        pg = new PageReference('https://postalservicecommunity-developer-edition.na174.force.com/mailhub');
+                        pg.setRedirect(true);
+                        return pg;
+                    }
+                catch(exception e)
+                	{
+                        system.debug(e.getMessage());
+                    }
+                return pg;
+            }
+        public void cancel()
+        	{
+                
+            }
+    }

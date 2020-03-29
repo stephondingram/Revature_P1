@@ -1,0 +1,44 @@
+<apex:page controller="createcase_controller">
+    <apex:slds />
+    <apex:pageBlock >
+        <apex:pageBlockSection title="Create a Case">
+            <apex:form >
+                <apex:actionRegion >
+                    <apex:pageBlock >
+                        <h1 style="font-size:36px;">{!$User.FirstName}, what's the matter?</h1>
+                        Subject: <apex:inputField value="{!case1.Subject}" required="true" /><br />
+                        Description: <apex:inputField value="{!case1.Description}" required="true"  /><br />
+                        Case Reason: <apex:inputField value="{!case1.Reason}" required="true"/><br />
+                        <apex:pageBlockButtons location="bottom">
+                            <apex:commandButton action="{! save }" value="Save" />
+                        </apex:pageBlockButtons> 
+                    </apex:pageBlock>
+                </apex:actionRegion>
+                <apex:actionRegion >
+                    <apex:pageBlock >
+                        <apex:pageBlockButtons location="bottom">
+                            <apex:commandButton action="{!renderOpenCases}" value="See Open Cases" reRender="OpenCases" />
+                            <apex:commandButton action="{!renderClosedCases}" value="See Closed Cases" reRender="ClosedCases"/>
+                        </apex:pageBlockButtons>
+                    </apex:pageBlock>
+                </apex:actionRegion>
+            </apex:form>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Open Cases" id="OpenCases">
+            <apex:pageBlockTable value="{!newcaselist}" var="ca">
+                <apex:column ><apex:outputField value="{!ca.casenumber}"/></apex:column>
+                <apex:column ><apex:outputField value="{!ca.Subject}"/></apex:column>
+                <apex:column ><apex:outputField value="{!ca.Description}"/></apex:column>
+                <apex:column ><a href="https://postalservicecommunity-developer-edition.na174.force.com/mailhub/{!ca.id}">Edit</a></apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Closed Cases" id="ClosedCases">
+            <apex:pageBlockTable value="{!oldcaselist}" var="ca2">
+                <apex:column ><apex:outputField value="{!ca2.casenumber}"/></apex:column>
+                <apex:column ><apex:outputField value="{!ca2.Subject}"/></apex:column>
+                <apex:column ><apex:outputField value="{!ca2.Description}"/></apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    
+</apex:page>

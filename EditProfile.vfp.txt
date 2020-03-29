@@ -1,0 +1,30 @@
+<apex:page controller="editprofile_controller">
+    <apex:slds />
+    <apex:form >
+        <apex:messages />
+        <apex:pageBlock >
+            <h1 style="text-align: center;font-size:36px;">Change Your Profile</h1><br/>
+            <apex:pageBlockSection >
+                <apex:inputField value="{!u.Name}" required="true"/>
+                <apex:inputField value="{!u.firstName}"/> 
+                <apex:inputField id="editemail" value="{!u.email}"/> 
+                <apex:inputField id="editlastName" value="{!u.lastName}"/> 
+                <apex:inputField id="editphone" value="{!u.phone}"/> 
+                <apex:inputField id="edittitle" value="{!u.title}"/> 
+                <apex:inputField value="{!u.TimeZoneSidKey}" required="true"/><br/>
+            </apex:pageBlockSection>
+                <br/><h1 style="text-align: center;font-size:24px;">Address</h1><br/>
+            <apex:pageBlockSection >
+                <apex:inputField id="editstreet" value="{!u.street}"/> 
+                <apex:inputField id="editcity" value="{!u.city}"/> 
+                <apex:inputField id="editstate" value="{!u.state}"/> 
+                <apex:inputField id="editpostalcode" value="{!u.postalcode}"/> 
+                <apex:inputField id="editcountry" value="{!u.country}"/> 
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton action="{!save}" value="Save" title="Save" />
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
+

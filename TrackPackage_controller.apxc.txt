@@ -1,0 +1,24 @@
+public class TrackPackage_controller
+	{
+        public string trackingCode {get;set;}
+        public ID current_user {get; set;}
+        public list<mailtracker__c> trackinglist {get; set;}
+        
+        public TrackPackage_controller()
+        	{
+                current_user = UserInfo.getUserId();
+                list<mailtracker__c> trackinglist = new list<mailtracker__c>();
+            }
+        public void search()
+        	{
+                try
+                	{
+                        list<mail__c> maillist = new list<mail__c>();
+                        mail__c maill = new mail__c();
+                        maillist = [select id, name, inhabitant__r.User__c, (select id, Arrival_Location__c, Arrival_Time__c from mailtracker__r) from mail__c where name = :trackingCode];
+                        maill = maillist[0];
+                        if(maill.inhabitant__r.User__c==current_user){trackinglist = maill.mailtracker__r;}
+                    }
+                catch(exception e){system.debug(e.getMessage());}
+            }
+    }

@@ -1,0 +1,29 @@
+public class viewpackages_controller
+	{
+        public ID current_user {get; set;}
+        public list<mail__c> oldmaillist {get; set;}
+        public list<mail__c> newmaillist {get; set;}
+        
+        public viewpackages_controller()
+        	{
+                current_user = UserInfo.getUserId();
+                oldmaillist = new list<mail__c>();
+                newmaillist = new list<mail__c>();
+            }
+        public void view1()
+        	{
+                try
+                	{
+                        newmaillist = [select Delivery_Status__c, Description__c, Weight_kg__c, Comments__c, inhabitant__r.User__c, name from mail__c where Delivery_Status__c != 'Delivered' AND inhabitant__r.User__c=:current_user];
+                    }
+                catch(exception e){system.debug(e.getMessage());}
+            }
+        public void view2()
+        	{
+                try
+                	{
+                        oldmaillist = [select Delivery_Status__c, Description__c, Weight_kg__c, Comments__c, inhabitant__r.User__c, name from mail__c where Delivery_Status__c = 'Delivered' AND inhabitant__r.User__c=:current_user];
+                    }
+                catch(exception e){system.debug(e.getMessage());}
+            }
+    }
